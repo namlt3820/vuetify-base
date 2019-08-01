@@ -10,7 +10,7 @@ function route(path, view, name, meta, children, folder) {
         path,
         meta,
         component: resovle => {
-            return !!folder
+            return folder
                 ? import(`@/views/${folder}/${view}.vue`).then(resovle)
                 : import(`@/views/${view}.vue`).then(resovle);
         },

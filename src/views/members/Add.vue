@@ -1,5 +1,5 @@
 <template>
-    <v-card class="table-type-1">
+    <v-card class="table-type-1 add-member-page">
         <v-card-text>
             <v-card class="title-grid" color="primary">
                 <v-card-title>
@@ -12,10 +12,7 @@
             <v-layout>
                 <v-flex justify-center md3>
                     <v-layout justify-center mt-5>
-                        <v-avatar color="accent" size="120">
-                            <img alt="avatar" src="https://vuetifyjs.com/apple-touch-icon-180x180.png" v-if="img" />
-                            <span v-else>VJ</span>
-                        </v-avatar>
+                        <avatar-core></avatar-core>
                     </v-layout>
                 </v-flex>
                 <v-flex md8>
@@ -30,13 +27,11 @@
                             v-validate="'required|max:10'"
                         ></v-text-field>
                         <v-text-field
-                            :counter="10"
                             :error-messages="errors.collect('phone')"
                             data-vv-name="phone"
                             label="Phone"
-                            required
                             v-model="phone"
-                            v-validate="{required: true, regex:'^([0-9]+)$'}"
+                            v-validate="{ required: true, regex: '^([0-9]+)$' }"
                         ></v-text-field>
                         <v-text-field
                             :error-messages="errors.collect('email')"
@@ -65,7 +60,11 @@
                             v-validate="'required'"
                             value="1"
                         ></v-checkbox>
-
+                        <v-radio-group row v-model="gender">
+                            <v-radio color="primary" label="Nam" value="1"></v-radio>
+                            <v-radio color="primary" label="Nữ" value="2"></v-radio>
+                        </v-radio-group>
+                        <vue-editor v-model="content"></vue-editor>
                         <v-btn @click="submit" class="mr-4">submit</v-btn>
                         <v-btn @click="clear">clear</v-btn>
                     </form>
@@ -77,19 +76,25 @@
 
 <script>
 // @ is an alias to /src
+import { VueEditor } from 'vue2-editor';
+import AvatarCore from '../../components/Avatar';
 
 export default {
-    name: 'add',
+    name: 'Add',
+    components: { VueEditor, AvatarCore },
     data() {
         return {
             title: 'Add Member Page',
             name: '',
             phone: '',
             email: '',
+            gender: '1',
+            content: '',
             select: null,
             items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
             checkbox: null,
             img: true,
+            overlay: false,
             dictionary: {
                 attributes: {
                     email: 'E-mail Address'
@@ -115,7 +120,9 @@ export default {
     },
     created() {},
     methods: {
-        submit() {},
+        submit() {
+            console.log(this.content);
+        },
         clear() {}
     }
 };
