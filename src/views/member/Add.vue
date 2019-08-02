@@ -64,6 +64,37 @@
                             <v-radio color="primary" label="Nam" value="1"></v-radio>
                             <v-radio color="primary" label="Nữ" value="2"></v-radio>
                         </v-radio-group>
+                        <v-combobox
+                            :items="itemsChips"
+                            hide-selected
+                            label="I use a scoped slot"
+                            multiple
+                            small-chips
+                            v-model="selectChips"
+                        >
+                            <template
+                                v-slot:selection="{ attrs, item, parent, selected, disabled }"
+                            >
+                                <v-chip
+                                    :disabled="disabled"
+                                    :input-value="selected"
+                                    :key="JSON.stringify(item)"
+                                    @click:close="parent.selectItem(item)"
+                                    small
+                                    v-bind="attrs"
+                                >
+                                    <!-- <v-avatar
+                                        class="accent white--text"
+                                        left
+                                        v-text="data.item.slice(0, 1).toUpperCase()"
+                                    ></v-avatar>-->
+                                    <span style="padding-right: 8px;">{{ item }}</span>
+                                    <v-icon @click="parent.selectItem(item)" small
+                                        >mdi-close</v-icon
+                                    >
+                                </v-chip>
+                            </template>
+                        </v-combobox>
                         <vue-editor v-model="content"></vue-editor>
                         <v-btn @click="submit" class="mr-4">submit</v-btn>
                         <v-btn @click="clear">clear</v-btn>
@@ -95,6 +126,8 @@ export default {
             checkbox: null,
             img: true,
             overlay: false,
+            selectChips: ['Vuetify', 'Programming'],
+            itemsChips: ['Programming', 'Design', 'Vue', 'Vuetify'],
             dictionary: {
                 attributes: {
                     email: 'E-mail Address'
@@ -121,7 +154,7 @@ export default {
     created() {},
     methods: {
         submit() {
-            console.log(this.content);
+            // console.log(this.content);
         },
         clear() {}
     }

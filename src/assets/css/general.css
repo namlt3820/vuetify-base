@@ -30,3 +30,27 @@
 .list-menu-left .v-list-group .v-list-item__icon.v-list-group__header__append-icon {
     min-width: 24px;
 }
+
+/*Style header card*/
+.style-header-grid {
+    margin-top: 40px;
+}
+.style-header-grid .title-grid {
+    color: #fff;
+}
+.style-header-grid .title-grid .t1 {
+    font-size: 18px !important;
+}
+.style-header-grid .title-grid .t2 {
+    font-size: 14px;
+}
+.style-header-grid .title-grid {
+    margin-top: -40px;
+}
+.style-header-grid .title-grid .v-card__title {
+    justify-content: space-between;
+}
+.style-header-grid .title-grid .v-btn {
+    text-transform: initial;
+}
+/*End css style header card*/

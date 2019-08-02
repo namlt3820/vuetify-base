@@ -62,7 +62,17 @@ export default {
                 {
                     title: 'Quản lý đối tác',
                     icon: 'mdi-account-group',
-                    to: '/customer'
+                    to: '/customer',
+                    items: [
+                        {
+                            title: 'Danh sách đối tác',
+                            to: '/customer/lists'
+                        },
+                        {
+                            title: 'Thêm đối tác',
+                            to: '/customer/add'
+                        }
+                    ]
                 },
                 {
                     title: 'Quản lý hoạt động người dùng',

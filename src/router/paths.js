@@ -19,7 +19,7 @@ export default [
         path: '/member',
         name: 'Member Manage Page',
         view: 'Member',
-        folder: 'members',
+        folder: 'member',
         children: [
             {
                 path: 'lists',
@@ -29,6 +29,24 @@ export default [
             {
                 path: 'add',
                 name: 'Thêm hội viên',
+                view: 'Add'
+            }
+        ]
+    },
+    {
+        path: '/customer',
+        name: 'Customer Manage Page',
+        view: 'Customer',
+        folder: 'customer',
+        children: [
+            {
+                path: 'lists',
+                name: 'Danh sách đối tác',
+                view: 'Lists'
+            },
+            {
+                path: 'add',
+                name: 'Thêm đối tác',
                 view: 'Add'
             }
         ]
