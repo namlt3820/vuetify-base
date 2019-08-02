@@ -1,0 +1,13 @@
+[
+    {
+        "text": "ID",
+        "align": "center",
+        "sortable": false,
+        "value": "id"
+    },
+    { "text": "Name", "value": "name" },
+    { "text": "Phone", "value": "phone" },
+    { "text": "Email", "value": "email" },
+    { "text": "Status", "align": "center", "value": "status" },
+    { "text": "Actions", "align": "right", "value": "", "sortable": false }
+]
