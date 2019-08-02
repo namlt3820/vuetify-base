@@ -9,7 +9,21 @@
         "eslint": "eslint src/**/*.{js,vue} --fix",
         "prettier": "prettier --write src/**/*.{js,vue}"
     },
+    "lint-staged": {
+        "src/**/*.{js,vue}": [
+            "eslint src/**/*.{js,vue}",
+            "git add"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^12.3.1",
+        "@ckeditor/ckeditor5-build-decoupled-document": "^12.3.1",
+        "@ckeditor/ckeditor5-vue": "^1.0.0-beta.2",
         "core-js": "^2.6.5",
         "vee-validate": "^2.2.13",
         "vue": "^2.6.10",
@@ -31,6 +45,8 @@
         "eslint-plugin-import": "^2.18.2",
         "eslint-plugin-prettier": "^3.1.0",
         "eslint-plugin-vue": "^5.0.0",
+        "husky": "^3.0.2",
+        "lint-staged": "^9.2.1",
         "prettier": "^1.18.2",
         "sass": "^1.17.4",
         "sass-loader": "^7.1.0",
@@ -44,16 +60,15 @@
             "node": true
         },
         "extends": [
-            "plugin:vue/essential",
-            "eslint:recommended"
+            "airbnb-base",
+            "plugin:vue/base",
+            "prettier"
+        ],
+        "plugins": [
+            "prettier"
         ],
         "rules": {
-            "import/no-unresolved": [
-                2,
-                {
-                    "caseSensitive": false
-                }
-            ],
+            "import/no-unresolved": 0,
             "import/no-named-as-default": 0,
             "import/extensions": [
                 "off",

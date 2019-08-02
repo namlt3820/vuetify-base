@@ -15,8 +15,8 @@ function route(path, view, name, meta, children, folder) {
                 : import(`@/views/${view}.vue`).then(resovle);
         },
         children: children
-            ? children.map(path =>
-                  route(path.path, path.view, path.name, path.meta, path.children, folder)
+            ? children.map(item =>
+                  route(item.path, item.view, item.name, item.meta, item.children, folder)
               )
             : []
     };

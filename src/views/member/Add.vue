@@ -96,6 +96,8 @@
                             </template>
                         </v-combobox>
                         <vue-editor v-model="content"></vue-editor>
+                        <div class="mt-5"></div>
+                        <ckeditor :editor="editor"></ckeditor>
                         <v-btn @click="submit" class="mr-4">submit</v-btn>
                         <v-btn @click="clear">clear</v-btn>
                     </form>
@@ -108,13 +110,17 @@
 <script>
 // @ is an alias to /src
 import { VueEditor } from 'vue2-editor';
+import CKEditor from '@ckeditor/ckeditor5-vue';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import AvatarCore from '../../components/Avatar';
 
 export default {
     name: 'Add',
-    components: { VueEditor, AvatarCore },
+    components: { VueEditor, AvatarCore, ckeditor: CKEditor.component },
     data() {
         return {
+            editor: DecoupledEditor,
             title: 'Add Member Page',
             name: '',
             phone: '',

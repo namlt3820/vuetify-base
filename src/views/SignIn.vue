@@ -49,7 +49,7 @@ import store from '../store/index';
 
 export default {
     beforeRouteEnter(to, from, next) {
-        console.log(3);
+        // console.log(3);
         if (store.getters['auth/isLoggedIn']) {
             next(vm => {
                 if (vm.$route.query.redirect) {
