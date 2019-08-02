@@ -1,38 +1,38 @@
 <template>
-    <v-navigation-drawer app v-model="status">
-        <div class="logo-page">
-            <img src="@/assets/logo.png" title="Point Hub v2.0" />
-            <div class="text-logo">Point Hub v2.0</div>
-        </div>
+  <v-navigation-drawer app v-model="status">
+    <div class="logo-page">
+      <img src="@/assets/logo.png" title="Point Hub v2.0" />
+      <div class="text-logo">Point Hub v2.0</div>
+    </div>
 
-        <v-list class="list-menu-left" dense>
-            <template v-for="item in items">
-                <v-list-item :key="item.title" :to="item.to" v-if="!item.items">
-                    <v-list-item-action>
-                        <v-icon>{{ item.icon }}</v-icon>
-                    </v-list-item-action>
+    <v-list class="list-menu-left" dense>
+      <template v-for="item in items">
+        <v-list-item :key="item.title" :to="item.to" v-if="!item.items">
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
 
-                    <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-group :key="item.title" :prepend-icon="item.icon" v-else>
-                    <template v-slot:activator>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                    </template>
-                    <v-list-item :key="item2.title" :to="item2.to" v-for="item2 in item.items">
-                        <v-list-item-action>
-                            <v-icon>{{ item2.icon }}</v-icon>
-                        </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-group :key="item.title" :prepend-icon="item.icon" v-else>
+          <template v-slot:activator>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </template>
+          <v-list-item :key="item2.title" :to="item2.to" v-for="item2 in item.items">
+            <v-list-item-action>
+              <v-icon>{{ item2.icon }}</v-icon>
+            </v-list-item-action>
 
-                        <v-list-item-content>
-                            <v-list-item-title>{{ item2.title }}</v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
-                </v-list-group>
-            </template>
-        </v-list>
-    </v-navigation-drawer>
+            <v-list-item-content>
+              <v-list-item-title>{{ item2.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
+      </template>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 <script>
 export default {
@@ -71,6 +71,10 @@ export default {
                         {
                             title: 'Thêm đối tác',
                             to: '/customer/add'
+                        },
+                        {
+                            title: 'Chi tiết cửa hàng',
+                            to: '/customer/detail'
                         }
                     ]
                 },
