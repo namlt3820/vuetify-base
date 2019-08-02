@@ -12,7 +12,13 @@
                     </div>
                 </v-card-title>
             </v-card>
-            <v-data-table :headers="headers" :items="desserts" :loading="true">
+            <v-data-table
+                :headers="headers"
+                :items="desserts"
+                :loading="true"
+                @page-count="pageCount = $event"
+                hide-default-footer
+            >
                 <v-progress-linear color="blue" indeterminate v-slot:progress></v-progress-linear>
                 <template v-slot:items="props">
                     <td class="text-xs-center">{{ props.item.id }}</td>
@@ -23,12 +29,15 @@
                     <td class="text-xs-right">s</td>
                 </template>
             </v-data-table>
+            <Pagination :pageCount="pageCount" @page="page" @pagination="pagination" />
         </v-card-text>
     </v-card>
 </template>
 
 <script>
 // @ is an alias to /src
+import Pagination from '../../components/core/Pagination.vue';
+import data from '../../data/data.json';
 
 export default {
     name: 'List',
@@ -47,81 +56,33 @@ export default {
                 { text: 'Status', align: 'center', value: 'status' },
                 { text: 'Actions', align: 'right', value: '', sortable: false }
             ],
-            desserts: [
-                {
-                    id: 1,
-                    name: 'Frozen Yogurt',
-                    phone: 159,
-                    email: 6.0,
-                    status: 24
-                },
-                {
-                    id: 2,
-                    name: 'Frozen Yogurt',
-                    phone: 159,
-                    email: 6.0,
-                    status: 24
-                },
-                {
-                    id: 3,
-                    name: 'Frozen Yogurt',
-                    phone: 159,
-                    email: 6.0,
-                    status: 24
-                },
-                {
-                    id: 4,
-                    name: 'Frozen Yogurt',
-                    phone: 159,
-                    email: 6.0,
-                    status: 24
-                },
-                {
-                    id: 5,
-                    name: 'Frozen Yogurt',
-                    phone: 159,
-                    email: 6.0,
-                    status: 24
-                },
-                {
-                    id: 6,
-                    name: 'Frozen Yogurt',
-                    phone: 159,
-                    email: 6.0,
-                    status: 24
-                },
-                {
-                    id: 7,
-                    name: 'Frozen Yogurt',
-                    phone: 159,
-                    email: 6.0,
-                    status: 24
-                },
-                {
-                    id: 8,
-                    name: 'Frozen Yogurt',
-                    phone: 159,
-                    email: 6.0,
-                    status: 24
-                },
-                {
-                    id: 9,
-                    name: 'Frozen Yogurt',
-                    phone: 159,
-                    email: 6.0,
-                    status: 24
-                },
-                {
-                    id: 10,
-                    name: 'Frozen Yogurt',
-                    phone: 159,
-                    email: 6.0,
-                    status: 24
-                }
-            ]
+            desserts: [],
+            pageCount: 0,
+            perpage: 0
         };
     },
-    created() {},
-    components: {}
+    mounted() {
+        this.pagination(5);
+    },
+    components: {
+        Pagination
+    },
+    methods: {
+        pagination(perpage) {
+            this.perpage = perpage;
+            const newData = data.slice(0, perpage);
+            this.desserts = newData;
+        },
+        page(page) {
+            if (page === 1 || 0) {
+                this.pagination(this.perpage);
+            } else {
+                const begin = (page - 1) * this.perpage;
+                const end = page * this.perpage;
+                const newData = data.slice(begin, end);
+                this.desserts = newData;
+            }
+        }
+    }
 };
 </script>
