@@ -48,6 +48,11 @@ export default [
                 path: 'add',
                 name: 'Thêm đối tác',
                 view: 'Add'
+            },
+            {
+                path: 'detail',
+                name: 'Chi tiết cửa hàng',
+                view: 'Detail'
             }
         ]
     },
