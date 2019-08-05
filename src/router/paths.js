@@ -53,6 +53,11 @@ export default [
                 path: 'detail',
                 name: 'Chi tiết cửa hàng',
                 view: 'Detail'
+            },
+            {
+                path: 'add-store',
+                name: 'Tạo cửa hàng',
+                view: 'AddStore'
             }
         ]
     },
