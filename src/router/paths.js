@@ -57,6 +57,19 @@ export default [
         ]
     },
     {
+        path: '/promotion-campaign/check-in',
+        name: 'Promotion Campaign Page',
+        view: 'CheckIn',
+        folder: 'PromotionCampaign/CheckIn',
+        children: [
+            {
+                path: 'add',
+                name: 'Thêm Check-In',
+                view: 'Add'
+            }
+        ]
+    },
+    {
         path: '/sign-in',
         name: 'Sign-In Page',
         view: 'SignIn'

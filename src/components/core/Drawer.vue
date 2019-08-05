@@ -20,15 +20,36 @@
                     <template v-slot:activator>
                         <v-list-item-title>{{ item.title }}</v-list-item-title>
                     </template>
-                    <v-list-item :key="item2.title" :to="item2.to" v-for="item2 in item.items">
-                        <v-list-item-action>
-                            <v-icon>{{ item2.icon }}</v-icon>
-                        </v-list-item-action>
+                    <template v-for="item2 in item.items">
+                        <v-list-item :key="item2.title" :to="item2.to" v-if="!item2.items">
+                            <v-list-item-action>
+                                <v-icon>{{ item2.icon }}</v-icon>
+                            </v-list-item-action>
 
-                        <v-list-item-content>
-                            <v-list-item-title>{{ item2.title }}</v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>{{ item2.title }}</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-group sub-group :key="item2.title" v-else>
+                            <template v-slot:activator>
+                                <v-list-item-title>{{ item2.title }}</v-list-item-title>
+                            </template>
+
+                            <v-list-item
+                                :key="item3.title"
+                                :to="item3.to"
+                                v-for="item3 in item2.items"
+                            >
+                                <v-list-item-action>
+                                    <v-icon>{{ item3.icon }}</v-icon>
+                                </v-list-item-action>
+
+                                <v-list-item-content>
+                                    <v-list-item-title>{{ item3.title }}</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list-group>
+                    </template>
                 </v-list-group>
             </template>
         </v-list>
@@ -75,6 +96,33 @@ export default {
                         {
                             title: 'Chi tiết cửa hàng',
                             to: '/customer/detail'
+                        }
+                    ]
+                },
+                {
+                    title: 'Promotion Campaign',
+                    icon: 'mdi-account-group',
+                    to: '/promotion-campaign',
+                    items: [
+                        {
+                            title: 'Quản lý Check-in',
+                            icon: 'mdi-account-group',
+                            items: [
+                                {
+                                    title: 'Thêm check-in',
+                                    to: '/promotion-campaign/check-in/add'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Quản lý Minigame',
+                            icon: 'mdi-account-group',
+                            items: [
+                                {
+                                    title: 'Thêm minigame',
+                                    to: '/promotion-campaign/minigame/add'
+                                }
+                            ]
                         }
                     ]
                 },
