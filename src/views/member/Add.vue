@@ -97,7 +97,12 @@
                         </v-combobox>
                         <vue-editor v-model="content"></vue-editor>
                         <div class="mt-5"></div>
-                        <ckeditor :editor="editor"></ckeditor>
+                        <ckeditor :editor="editor" v-model="editorData"></ckeditor>
+                        <ckeditor
+                            :editor="editor"
+                            v-model="editorData"
+                            :config="editorConfig"
+                        ></ckeditor>
                         <v-btn @click="submit" class="mr-4">submit</v-btn>
                         <v-btn @click="clear">clear</v-btn>
                     </form>
@@ -111,8 +116,8 @@
 // @ is an alias to /src
 import { VueEditor } from 'vue2-editor';
 import CKEditor from '@ckeditor/ckeditor5-vue';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import AvatarCore from '../../components/Avatar';
 
 export default {
@@ -120,7 +125,37 @@ export default {
     components: { VueEditor, AvatarCore, ckeditor: CKEditor.component },
     data() {
         return {
-            editor: DecoupledEditor,
+            editor: ClassicEditor,
+            editorData: 'abc',
+            editorConfig: {
+                toolbar: [
+                    'heading',
+                    '|',
+                    'bold',
+                    'italic',
+                    'link',
+                    'bulletedList',
+                    'numberedList',
+                    'blockQuote'
+                ],
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        {
+                            model: 'heading1',
+                            view: 'h1',
+                            title: 'Heading 1',
+                            class: 'ck-heading_heading1'
+                        },
+                        {
+                            model: 'heading2',
+                            view: 'h2',
+                            title: 'Heading 2',
+                            class: 'ck-heading_heading2'
+                        }
+                    ]
+                }
+            },
             title: 'Add Member Page',
             name: '',
             phone: '',
