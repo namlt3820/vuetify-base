@@ -12,18 +12,24 @@
                     </div>
                 </v-card-title>
             </v-card>
-            <Table />
+            <Table :member="member" />
         </v-card-text>
     </v-card>
 </template>
 
 <script>
 import Table from '../../components/core/Table.vue';
+import member from '../../utils/member.json';
 
 export default {
     name: 'List',
     components: {
         Table
+    },
+    computed: {
+        member() {
+            return member;
+        }
     }
 };
 </script>
