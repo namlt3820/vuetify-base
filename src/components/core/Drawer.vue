@@ -96,6 +96,10 @@ export default {
                         {
                             title: 'Chi tiết cửa hàng',
                             to: '/customer/detail'
+                        },
+                        {
+                            title: 'Tạo cửa hàng',
+                            to: '/customer/add-store'
                         }
                     ]
                 },
