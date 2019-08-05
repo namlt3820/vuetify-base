@@ -72,9 +72,7 @@
                             small-chips
                             v-model="selectChips"
                         >
-                            <template
-                                v-slot:selection="{ attrs, item, parent, selected, disabled }"
-                            >
+                            <template v-slot:selection="{ attrs, item, parent, selected, disabled }">
                                 <v-chip
                                     :disabled="disabled"
                                     :input-value="selected"
@@ -89,9 +87,7 @@
                                         v-text="data.item.slice(0, 1).toUpperCase()"
                                     ></v-avatar>-->
                                     <span style="padding-right: 8px;">{{ item }}</span>
-                                    <v-icon @click="parent.selectItem(item)" small
-                                        >mdi-close</v-icon
-                                    >
+                                    <v-icon @click="parent.selectItem(item)" small>mdi-close</v-icon>
                                 </v-chip>
                             </template>
                         </v-combobox>
