@@ -4,13 +4,16 @@
             <v-flex md12 sm12>
                 Home
                 <router-link to="/sign-in">Go to Login</router-link>
+                <br />
+                <br />
+                <date-range-picker></date-range-picker>
             </v-flex>
         </v-layout>
     </v-container>
 </template>
 
 <script>
-// @ is an alias to /src
+import DateRangePicker from '../components/core/DateRangePicker';
 
 export default {
     name: 'home',
@@ -26,6 +29,6 @@ export default {
         // console.log(this.isLoggedIn);
     },
 
-    components: {}
+    components: { DateRangePicker }
 };
 </script>
