@@ -1,7 +1,7 @@
 <template>
     <div class="table-member">
         <v-data-table
-            :headers="headers"
+            :headers="member"
             :items="desserts"
             :loading="true"
             @page-count="paginations.pageCount = $event"
@@ -25,13 +25,11 @@
 // @ is an alias to /src
 import Pagination from './Pagination.vue';
 import data from '../../data/data.json';
-import member from '../../utils/member.json';
 
 export default {
     name: 'Table',
     data() {
         return {
-            headers: member,
             desserts: [],
             paginations: {
                 pageCount: 0,
@@ -39,6 +37,7 @@ export default {
             }
         };
     },
+    props: ['member'],
     mounted() {
         this.pagination(5);
     },
