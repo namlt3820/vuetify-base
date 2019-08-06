@@ -1,5 +1,20 @@
 <template>
     <div>
+        <v-layout align-center>
+            <v-flex xs12 sm6 md4 class="pb-0">
+                <v-select
+                    solo
+                    :items="items"
+                    v-model="select"
+                    label="Chọn thời gian"
+                    single-line
+                    item-text="nameRange"
+                    return-object
+                    v-on:change="changeRange"
+                    :hide-details="true"
+                ></v-select>
+            </v-flex>
+        </v-layout>
         <date-picker
             v-model="range"
             :lang="lang"
@@ -12,9 +27,14 @@
             :editable="false"
             :shortcuts="shortcuts"
             range-separator=" ~ "
+            v-show="showDateRange"
+            class="mb-7"
+            :popupStyle="{ 'z-index': '9999999999' }"
+            :input-attr="{ id: 'dateRange' }"
         >
             ></date-picker
         >
+        <p>{{ displayRange }}</p>
     </div>
 </template>
 
@@ -25,9 +45,75 @@ export default {
     components: {
         DatePicker
     },
+    methods: {
+        changeRange(item) {
+            item.fn();
+        }
+    },
     data() {
         return {
-            range: '',
+            select: {},
+            showDateRange: false,
+            items: [
+                {
+                    nameRange: 'Hôm nay',
+                    fn: () => {
+                        this.showDateRange = false;
+                        this.range = [new Date(), new Date()];
+                    }
+                },
+                {
+                    nameRange: 'Tuần này',
+                    fn: () => {
+                        this.showDateRange = false;
+                        const date = new Date();
+                        const firstDay = new Date(date.setDate(date.getDate() - date.getDay() + 1));
+                        const lastDay = new Date(date.setDate(date.getDate() - date.getDay() + 7));
+                        this.range = [firstDay, lastDay];
+                    }
+                },
+                {
+                    nameRange: 'Tháng này',
+                    fn: () => {
+                        this.showDateRange = false;
+                        const date = new Date();
+                        const year = date.getFullYear();
+                        const month = date.getMonth();
+                        const firstDay = new Date(year, month, 1);
+                        const lastDay = new Date(year, month + 1, 0);
+                        this.range = [firstDay, lastDay];
+                    }
+                },
+                {
+                    nameRange: '30 Ngày trước',
+                    fn: () => {
+                        this.showDateRange = false;
+                        const today = new Date();
+                        const last30Days = new Date(today.setDate(today.getDate() - 30));
+                        this.range = [last30Days, new Date()];
+                    }
+                },
+                {
+                    nameRange: 'Năm này',
+                    fn: () => {
+                        this.showDateRange = false;
+                        const date = new Date();
+                        const year = date.getFullYear();
+                        const firstDay = new Date(year, 0, 1);
+                        const lastDay = new Date(year, 11, 31);
+                        this.range = [firstDay, lastDay];
+                    }
+                },
+                {
+                    nameRange: 'Tuỳ chọn',
+                    fn: () => {
+                        this.showDateRange = true;
+                        document.getElementById('dateRange').click();
+                        document.getElementById('dateRange').style.display = 'none';
+                    }
+                }
+            ],
+            range: [],
             lang: {
                 days: ['CN', 'Hai', 'Ba', 'Bốn', 'Năm', 'Sáu', 'Bảy'],
                 months: [
@@ -90,9 +176,20 @@ export default {
                         this.range = [firstDay, lastDay];
                     }
                 }
-            ],
-            mode: ['Hôm nay', 'Tuần này', 'Tháng này', '30 ngày trước', 'Năm này', 'Tuỳ chọn']
+            ]
         };
+    },
+    computed: {
+        displayRange() {
+            const firstDay = this.range[0];
+            const lastDay = this.range[1];
+            if (firstDay === undefined || lastDay === undefined) {
+                return '';
+            }
+            return `Ngày ${firstDay.getDate()}/${firstDay.getMonth() +
+                1}/${firstDay.getFullYear()} ~ Ngày ${lastDay.getDate()}/${lastDay.getMonth() +
+                1}/${lastDay.getFullYear()}`;
+        }
     }
 };
 </script>

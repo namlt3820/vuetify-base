@@ -73,7 +73,9 @@
                             small-chips
                             v-model="selectChips"
                         >
-                            <template v-slot:selection="{ attrs, item, parent, selected, disabled }">
+                            <template
+                                v-slot:selection="{ attrs, item, parent, selected, disabled }"
+                            >
                                 <v-chip
                                     :disabled="disabled"
                                     :input-value="selected"
