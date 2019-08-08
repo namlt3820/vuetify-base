@@ -73,6 +73,28 @@ export default {
                     }
                 },
                 {
+                    nameRange: 'Tuần trước',
+                    fn: () => {
+                        this.showDateRange = false;
+                        const date = new Date();
+                        const firstDay = new Date(date.setDate(date.getDate() - date.getDay() - 6));
+                        const lastDay = new Date(date.setDate(date.getDate() - date.getDay() + 7));
+                        this.range = [firstDay, lastDay];
+                        this.showDateOptions = false;
+                    }
+                },
+                {
+                    nameRange: '7 ngày trước',
+                    fn: () => {
+                        this.showDateRange = false;
+                        const date = new Date();
+                        const firstDay = new Date(date.setDate(date.getDate() - 6));
+                        const lastDay = new Date();
+                        this.range = [firstDay, lastDay];
+                        this.showDateOptions = false;
+                    }
+                },
+                {
                     nameRange: 'Tháng này',
                     fn: () => {
                         this.showDateRange = false;
@@ -86,12 +108,53 @@ export default {
                     }
                 },
                 {
+                    nameRange: 'Tháng trước',
+                    fn: () => {
+                        this.showDateRange = false;
+                        const date = new Date();
+                        const year = date.getFullYear();
+                        const month = date.getMonth();
+                        const firstDay = new Date(year, month - 1, 1);
+                        const lastDay = new Date(year, month, 0);
+                        this.range = [firstDay, lastDay];
+                        this.showDateOptions = false;
+                    }
+                },
+                {
                     nameRange: '30 Ngày trước',
                     fn: () => {
                         this.showDateRange = false;
                         const today = new Date();
                         const last30Days = new Date(today.setDate(today.getDate() - 30));
                         this.range = [last30Days, new Date()];
+                        this.showDateOptions = false;
+                    }
+                },
+                {
+                    nameRange: 'Quý này',
+                    fn: () => {
+                        this.showDateRange = false;
+                        const date = new Date();
+                        const year = date.getFullYear();
+                        const month = date.getMonth() + 1;
+                        const quarter = parseInt(month / 4, 10) + 1;
+                        const firstDay = new Date(year, quarter * 3 - 3, 1);
+                        const lastDay = new Date(year, quarter * 3, 0);
+                        this.range = [firstDay, lastDay];
+                        this.showDateOptions = false;
+                    }
+                },
+                {
+                    nameRange: 'Quý trước',
+                    fn: () => {
+                        this.showDateRange = false;
+                        const date = new Date();
+                        const year = date.getFullYear();
+                        const month = date.getMonth() + 1;
+                        const quarter = parseInt(month / 4, 10);
+                        const firstDay = new Date(year, quarter * 3 - 3, 1);
+                        const lastDay = new Date(year, quarter * 3, 0);
+                        this.range = [firstDay, lastDay];
                         this.showDateOptions = false;
                     }
                 },
