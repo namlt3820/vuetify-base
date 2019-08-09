@@ -1,26 +1,23 @@
 <template>
     <div>
-        <v-btn @click="showDateOptions = true" color="success">{{ displayRange }}</v-btn>
-        <v-layout justify-start>
-            <v-flex xs12 sm6 md4 py-0>
-                <v-list v-if="showDateOptions">
-                    <v-list-item-group v-model="item" color="primary">
-                        <v-list-item v-for="(item, index) in items" :key="index" @click="item.fn">
-                            <v-list-item-content>
-                                <v-list-item-title>{{ item.nameRange }}</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list-item-group>
+        <div>
+            <v-menu offset-y>
+                <template v-slot:activator="{ on }">
+                    <v-btn color="primary" dark v-on="on">{{ displayRange }}</v-btn>
+                </template>
+                <v-list>
+                    <v-list-item v-for="(item, index) in items" :key="index" @click="item.fn">
+                        <v-list-item-title>{{ item.nameRange }}</v-list-item-title>
+                    </v-list-item>
                 </v-list>
-            </v-flex>
-        </v-layout>
+            </v-menu>
+        </div>
         <date-picker
             v-model="range"
             :lang="lang"
             range
             type="date"
             format="Ngày DD/MM/YYYY"
-            placeholder="Chọn thời gian"
             width="500"
             confirm
             :editable="false"
@@ -29,9 +26,8 @@
             v-show="showDateRange"
             :popupStyle="{ 'z-index': '9999999999' }"
             :input-attr="{ id: 'dateRange' }"
-        >
-            ></date-picker
-        >
+            @confirm="showDateRange = false"
+        ></date-picker>
     </div>
 </template>
 
@@ -175,8 +171,9 @@ export default {
                     fn: () => {
                         this.showDateRange = true;
                         this.showDateOptions = false;
-                        document.getElementById('dateRange').click();
-                        document.getElementById('dateRange').style.display = 'none';
+                        const inputRange = document.querySelector('#dateRange');
+                        inputRange.click();
+                        inputRange.style.display = 'none';
                     }
                 }
             ],
@@ -215,3 +212,9 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.mx-datepicker {
+    display: block;
+}
+</style>
