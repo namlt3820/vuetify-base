@@ -7,6 +7,8 @@
                 <br />
                 <br />
                 <date-range-picker></date-range-picker>
+                <br />
+                <CKFinder></CKFinder>
             </v-flex>
         </v-layout>
     </v-container>
@@ -14,6 +16,7 @@
 
 <script>
 import DateRangePicker from '../components/core/DateRangePicker';
+import CKFinder from '../components/core/CKFinder';
 
 export default {
     name: 'home',
@@ -29,6 +32,6 @@ export default {
         // console.log(this.isLoggedIn);
     },
 
-    components: { DateRangePicker }
+    components: { DateRangePicker, CKFinder }
 };
 </script>
